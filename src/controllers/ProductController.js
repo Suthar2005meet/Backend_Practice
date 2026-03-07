@@ -43,9 +43,18 @@ const deleteProduct = async(req,resp) => {
     }
 }
 
+const UpdateData = async (req,resp) => {
+    const UpdatedObj = await ProductSchema.findByIdAndUpdate(req.params.id,req.body,{new:true})
+    resp.json ({
+        message : 'Data has been updated',
+        data : UpdatedObj
+    })
+}
+
 module.exports = {
     getAllProduct,
     getFindByid,
     addProduct,
-    deleteProduct
+    deleteProduct,
+    UpdateData
 }
