@@ -14,9 +14,9 @@ const BookSchema = new Schema ({
     AutherName : {
         type : String
     },
-    Language : {
+    Language : [{
         type : String
-    }
+    }]
 })
 
 module.exports = mongoose.model('books',BookSchema)

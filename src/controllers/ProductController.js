@@ -51,10 +51,37 @@ const UpdateData = async (req,resp) => {
     })
 }
 
+const AddById = async (req,resp) => {
+    const AddedData = await ProductSchema.findByIdAndUpdate(req.params.id,{$push:{ProductColor:req.body.ProductColor}},{new : true})
+    resp.json({
+        message : "Data Added Successfully",
+        data : AddedData
+    })
+}
+
+const deleteById = async (req,resp) => {
+    const deletedData = await ProductSchema.findByIdAndUpdate(req.params.id,{$pull:{ProductColor:req.body.ProductColor}},{new : true})
+    resp.json({
+        message : "Data Added Successfully",
+        data : deletedData
+    })
+}
+
+const SearchProduct = async(req,resp) => {
+    const SeachParam = req.query;
+    console.log('req.query',SeachParam)
+    resp.json({
+        message : "Searching..."
+    })
+}
+
 module.exports = {
     getAllProduct,
     getFindByid,
     addProduct,
     deleteProduct,
-    UpdateData
+    UpdateData,
+    AddById,
+    deleteById,
+    SearchProduct
 }

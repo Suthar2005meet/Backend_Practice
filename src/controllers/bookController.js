@@ -44,9 +44,37 @@ const deleteBook = async(req,resp) => {
     }
 }
 
+const AddElement = async (req,resp) => {
+    const AddedData = await BookSchema.findByIdAndUpdate(req.params.id,{$push:{Language:req.body.Language}},{new : true})
+    resp.json({
+        message : "Data Added Successfully",
+        data : AddedData
+    })
+}
+
+const removeElement = async (req,resp) => {
+    const deleteEle = await BookSchema.findByIdAndUpdate(req.params.id,{$pull:{Language:req.body.Language}},{new : true})
+    resp.json({
+        message : "Data Deleted Successfully",
+        data : deleteEle
+    })
+}
+
+const findEle = async (req,resp) => {
+    const searchparam = req.query
+    console.log('req.query',req.query)
+    resp.json({
+        message : 'messaging  ...',
+        data : searchparam
+    })
+}
+
 module.exports = {
     getAllBook,
     getBookByID,
     addBook,
-    deleteBook
+    deleteBook,
+    AddElement,
+    removeElement,
+    findEle
 }
